@@ -1,0 +1,96 @@
+{% extends "slag/layout.html" %}
+{% load static %}
+{% block title %}
+CarbonKillers
+{% endblock %}
+{% block body %}
+{% if user.is_authenticated %}
+        <div class="carboncontainer">
+            <img class="carbopoints" src="{% static 'slag/carbonpoints.png' %}" alt="">
+            <div id="CarbonPoints"> CarbonPoints: {{ expoints }}</div>
+        </div>
+        <div class="container">
+            <div class="slider-container">
+                {% for question in questions %}
+                <section class="slider-content2">
+                        <div>
+                            <iframe width="640" height="360" src="https://www.youtube.com/embed/2bkqXVc_1go?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                        </h3>
+                        </div>
+                        <!-- <img src="{% static 'slag/slider/animacion2.svg' %}" alt=""> -->
+                    </section>
+                    <section class="slider-content2">
+                        <div>
+                            <h2>Choose your answer, remember the option you chose</h2>
+                            <h3>{{ question.questionDescription }}
+                            <ul id="options">
+                                <li>a. {{ question.answerOption1 }}</li>
+                                <li>b. {{ question.answerOption2 }}</li>
+                                <li>c. {{ question.answerOption3 }}</li>
+                            </ul>
+                        </h3>
+                        </div>
+                        <!-- <img src="{% static 'slag/slider/animacion2.svg' %}" alt=""> -->
+                    </section>
+                    <section class="slider-content2">
+                        <div>
+                            <h3>Add 3 points if your choice was: {{ question.RightAnswer }}</h3>
+                            <h3>Add 2 points if your choice was: {{ question.NeutralAnswer }}</h3>
+                            <h3>Add 1 point if your choice was: {{ question.WrongAnswer }}</h3>
+                        </div>
+                    </section>
+                    {% endfor %}
+                    <section class="slider-content2">
+                        <div>
+                            <h3><a href="{% url 'data' %}">Check your result</a></h3>
+                        </div>
+                    </section>
+                   <!--  <section class="slider-content">
+                        <input type="submit">
+                    </section> -->
+                <!-- </form> -->
+            </div>
+            <a class="next" id="next">&#10095;</a>
+            <form action="{% url 'game' %}" method="GET">
+                <input id="completed" type="text" hidden value="0">
+            </form>
+            <br>
+            <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li id="nav3"><a href="{% url 'data' %}">Graphics & Data</a></li>
+                </ul>
+            </div>
+            </nav>
+        </div> 
+    {% else %}
+{% endif %}
+<script>let slider = document.querySelector(".slider-container")
+    let individualSlider = document.querySelectorAll(".slider-content2")
+    let width = individualSlider[0].clientWidth;
+    let interval = 3000;
+    let next = document.getElementById("next");
+    let counter = 1;
+    next.addEventListener("click", function(){
+        if(counter == individualSlider.length){
+            document.getElementById("completed").style.visibility = true;
+            next.removeEventListener("click")
+        }
+
+        slides();
+    });
+    
+    window.addEventListener("resize",function(){
+        width = individualSlider[0].clientWidth;
+    })
+   /*  setInterval(function(){
+        slides();
+    },interval);
+     */
+    function slides(){
+        slider.style.transform = "translate("+(-width*counter)+"px)";
+        slider.style.transition = "transform 1s";
+        counter++;
+    }
+    </script>
+    
+{% endblock %}

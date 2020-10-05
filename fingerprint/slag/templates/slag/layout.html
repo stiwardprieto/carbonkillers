@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+        <link href="{% static 'slag/styles.css' %}" rel="stylesheet">
+        <link rel="icon" href="{% static 'slag/carbonicon.ico' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    </head>
+    <body>
+        <div class="topdiv">
+            <header class="navbarheader">
+                <a href="{% url 'index' %}"><img class="logo" src="{% static 'slag/LogoPNG.png' %}" alt=""></a>
+                <section class="wrapper">
+                    <nav class="navbar navbar-inverse">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <span class="navbar-brand" >CarbonKillers</span>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li id="homelist"><a href="{% url 'index' %}">Home</a></li>
+                                <li id="nav2"><a href="{% url 'concepts' %}">Main concepts</a></li>
+                                {% if user.is_authenticated %}
+                                <li id="nav3"><a href="{% url 'game' %}">Play!</a></li>
+                                {% endif %}
+                            </ul>
+                            {% if user.is_authenticated %}
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+                                </ul>
+                            {% else %}
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                </ul>
+                            {% endif %}
+                        </div>
+                      </nav> 
+                </section>
+            </header>
+        </div>
+        <hr>
+        {% block body %}
+        {% endblock %}
+        <footer>
+            <hr>
+            <div class="container">
+                <h4>Our data has been gathered from: </h4>
+                <a href="http://www.ideam.gov.co/documents/24277/77448440/PNUD-IDEAM_2RBA.pdf/ff1af137-2149-4516-9923-6423ee4d4b54">Colombia at CMNUCC</a><br>
+                <a href="https://www.minambiente.gov.co/index.php/component/content/article/436-plantilla-bosques-biodiversidad-y-servicios-ecosistematicos-29">Colombian Ambiental Ministery</a><br>
+                <a href="https://www.usgs.gov/volcanoes/mount-st-helens/volcanic-gas-monitoring-mount-st-helens?qt-science_support_page_related_con=2#qt-science_support_page_related_con">United States Geological Service</a><br>
+                <a href="https://disc.gsfc.nasa.gov/datasets/OCO2_L2_Lite_FP_9r/summary?keywords=OCO-2">NASA Resources for SpaceApps 2020</a><br>
+                <a href="https://e3asesorias.com/plan-de-cambio-climatico-cauca-2040/">PIGCCTC Cauca</a>
+                <a href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data">Environmental Protection Agency</a>
+            </div>
+            
+        </footer>
+        <!-- <script src="{% static 'slag/script.js' %}"></script> -->
+    </body>
+</html>

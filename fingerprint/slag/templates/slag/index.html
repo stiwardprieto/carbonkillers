@@ -1,0 +1,82 @@
+{% extends "slag/layout.html" %}
+{% load static %}
+{% block title %}
+CarbonKillers
+{% endblock %}
+{% block body %}
+        <div class="container">
+            <div class="slider-container">
+                <section class="slider-content">
+                    <div>
+                        <h2>Did you know…? In 100 years each kg of CH4 warms the Earth 23 times more than the amount of CO2! Fortunately, there is more CO2 than CH4 in the planet's atmosphere. Therefore, CH4 is one of the most important GHG. </h2>
+                    </div>
+                    <img src="{% static 'slag/slider/animacion2.svg' %}" alt="">
+                </section>
+                <section class="slider-content">
+                    <div>
+                        <h2>Did you know…? According to a report from the Colombian Environment Ministry, each Colombian emits four carbon tons per year. This number is similar to the emissions that a hectare of forest (older than 20 years of life) can absorb in one year, or it can resemble a person that has driven 15000 km.</h2>
+                    </div>
+                    <img src="{% static 'slag/slider/animacion1.svg' %}" alt="">
+                </section>
+                
+                <section class="slider-content">
+                    <div>
+                        <h2>Did you know…? that almost even human activity has a consequence in the environment and reducing the ecological impact to zero is impossible? But don’t worry, you can minimize it with little actions, like… the step of the man on the moon, small for man but huge for the humanity. </h2>
+                    </div>
+                    <img src="{% static 'slag/slider/animacion4.svg' %}" alt="">
+                </section>
+                <section class="slider-content">
+                    <div>
+                        <h2>Cattle raising causes 14.5% of all the greenhouse effect emissions and represents the quarter of the CH4 emissions, so it is recommendable to reduce the meat consumption. 
+
+                            Electric energy can be obtained from burning fossil fuels, this is the power supply of the electronic devices and electrodomestics in our houses. There’s also the emitted gases in the fabrication of these products. 
+                            </h2>
+                    </div>
+                    <img src="{% static 'slag/slider/animacion5.svg' %}" alt="">
+                </section>
+
+                <section class="slider-content">
+                    <div>
+                        <h2>Ways to reduce your Carbon footprint:
+                            <ol>
+                                <h3><li>Less use of dryer</li></h3>
+                                <h3><li>Unplug your phone charger</li></h3>
+                                <h3><li>Keep your fridge clean. The excess of plastic bags and the ice in the congelator makes that the fridge needs more power to stay cold, so it spends more electricity.   </li></h3>
+                                <h3><li>Use your bicycle more often</li></h3>
+                                <h3><li>Put your beverages into a therm instead of plastic bottles.</li></h3>
+                                <h3><li>Try eating less meat</li></h3>
+                                <h3><li>Adopt and raise plants</li></h3>
+                                <h3><li>Remember the 3 R: Reuse, Recycle, Reduce. </li></h3>
+                            </ol>
+                        </h2>
+                    </div>
+                    <img src="{% static 'slag/slider/animacion3.svg' %}" alt="">
+                </section>
+            </div>
+        </div>
+        <script>let slider = document.querySelector(".slider-container")
+            let individualSlider = document.querySelectorAll(".slider-content")
+            let counter=1;
+            let width = individualSlider[0].clientWidth;
+            let interval = 3000;
+            
+            
+            window.addEventListener("resize",function(){
+                width = individualSlider[0].clientWidth;
+            })
+            setInterval(function(){
+                slides();
+            },interval);
+            function slides(){
+                slider.style.transform = "translate("+(-width*counter)+"px)";
+                slider.style.transition = "transform 1s";
+                counter++;
+                if(counter == individualSlider.length){
+                    setTimeout(function(){
+                        slider.style.transform = "translate(0px)";
+                        // slider.style.transition = "transform 0s";
+                        counter=1;
+                    },3000)
+                }
+            }</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "slag/layout.html" %}
+{% load static %}
+{% block title %}
+CarbonKillers - Concepts
+{% endblock %}
+{% block body %}
+{% for x in concepts %}
+    <div class="articlewrapper">
+        <article class="noticias" itemscope itemtype="http://schema.org/NewsArticle">
+            <hr class="abstract-ruler">
+            <div class="abstract-content">
+            <header>
+                <h2 class="abstract-title" itemprop="headline">
+                    <span>{{ x.title }}</span>
+                </h2>
+            </header>
+            <div class="abstract-excerpt" itemprop="description">
+                <p>{{ x.description }}</p>
+            </div>
+            </div>
+        </article>
+    </div>
+{% endfor %}
+{% endblock %}
+
